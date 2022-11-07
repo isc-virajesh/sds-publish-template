@@ -1,0 +1,15 @@
+{{- if eq (toString .Values.irisHealthcareIntegrationService.enabled) "true" }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: iris-healthcare-integration-demo
+  namespace: {{ .Release.Name }}
+spec:
+  selector:
+    app: iris-healthcare-integration-demo
+  ports:
+    - port: {{ .Values.irisHealthcareIntegrationService.port }}
+      targetPort: 52773
+  type: LoadBalancer
+
+{{- end }}

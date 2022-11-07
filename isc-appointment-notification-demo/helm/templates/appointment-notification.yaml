@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iris-healthcare-integration-demo
+  namespace: {{.Release.Namespace}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: iris-healthcare-integration-demo
+  template: 
+    metadata: 
+      labels: 
+        app: iris-healthcare-integration-demo
+    spec:
+      imagePullSecrets:
+      {{- if .Values.requiredSecrets.intersystemsContainerRegistrySecret }}    
+      - name: {{ .Values.requiredSecrets.intersystemsContainerRegistrySecret }}
+      {{- end }}
+      containers:
+      - name: iris-healthcare-integration-demo
+        {{- if eq .Values.skaffold.enabled true }}
+        image: {{ .Values.skaffoldImage }}
+        {{- else }}
+        image: {{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Chart.AppVersion }}
+        {{- end }}
+        args: ["--check-caps", "false"]
+
+        resources:
+          requests:
+            cpu: {{ .Values.irisHealthcareIntegrationDemo.compute.main.cpu }}
+            memory: {{ .Values.irisHealthcareIntegrationDemo.compute.main.memory }}
+
+      {{- if .Values.irisHealthcareIntegrationDemo.compute.main.nodeTypeSelector }}
+      nodeSelector:
+        sds/node-type: {{ .Values.irisHealthcareIntegrationDemo.compute.main.nodeTypeSelector }}
+      {{- end }}
+      tolerations:
+      - key: sds/select-worker
+        value: select-worker
+        effect: NoSchedule

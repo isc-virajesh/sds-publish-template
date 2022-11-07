@@ -1,0 +1,28 @@
+# Used to specify where the deployment is being done
+cloudProvider: "dev"
+cloudProviderRegion: "dev-region"
+# serviceInternalName: "ltv-service"
+skaffold: false
+skaffoldImage: ""
+
+irisHealthcareIntegrationDemo:
+  compute:
+    main:
+      nodeTypeSelector: ""
+      cpu: 4
+      memory: 2Gi
+
+# mirrored: false
+image:
+  registry: intersystemsdc
+  repository: irisdemo-demo-appointmentsms
+
+requiredSecrets:
+  irisLicense: ""
+  intersystemsContainerRegistrySecret: ""
+
+
+irisHealthcareIntegrationService:
+  enabled: "true"
+  hostname: "localhost"
+  port: "10001"
