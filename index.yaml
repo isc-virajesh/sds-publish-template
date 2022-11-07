@@ -1,0 +1,19 @@
+apiVersion: v1
+entries:
+  iris-healthcare-integration-demo:
+  - annotations:
+      intersystems/sds-category: core,database
+      intersystems/sds-organization: InterSystems Corporation
+      intersystems/sds-title: iris-healthcare-integration-demo
+    apiVersion: v2
+    appVersion: amd64-version-1.2.0
+    created: "2022-11-07T16:14:57.659213-05:00"
+    description: This demo shows how easy it is to integrate an Electronic Medical
+      Record system that is sending HL7 messages with AWS.
+    digest: 994fef3c86060e8bcb06258271dcfe5011193c8738a566af55b9c23bf6e19479
+    name: iris-healthcare-integration-demo
+    type: application
+    urls:
+    - https://github.com/isc-virajesh/sds-publish-template/iris-healthcare-integration-demo-1.1.1.tgz
+    version: 1.1.1
+generated: "2022-11-07T16:14:57.657513-05:00"
